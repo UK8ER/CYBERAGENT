@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c40af07803fc7b542a38292b1c6e8244, type: 3}
+  m_Name: Infomation Data
+  m_EditorClassIdentifier: 
+  _InfoList:
+  - InfoId: 0
+    InfoTitle: "\u4E8B\u524D\u8ABF\u67FB\u306B\u3088\u308B\u8CC7\u6599 No.1"
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 1
+    InfoTitle: "\u4E8B\u524D\u8ABF\u67FB\u306B\u3088\u308B\u8CC7\u6599 No.2"
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
+  - InfoId: 0
+    InfoTitle: 
+    InfoContents: 
+    DefaultOpenFlug: 0
