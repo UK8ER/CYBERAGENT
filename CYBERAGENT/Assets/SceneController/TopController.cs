@@ -10,10 +10,10 @@ namespace Top
     {
         #region 
         [SerializeField]
-        private CommonButtonView _InfoButton;
+        private CommonButtonView _Misson1Button;
 
         [SerializeField]
-        private CommonButtonView _HackButton;
+        private CommonButtonView _Misson2Button;
 
         #endregion
 
@@ -23,21 +23,15 @@ namespace Top
         }
 
         /// <summary>
-        /// 「情報」ボタン押下時アクション
+        /// ボタン押下時アクション
         /// </summary>
-        public void OnClickInfoButton()
+        public void OnClickMisson1Button(int buttonId)
         {
+            // GameManagerに選択したボタンIDを登録
+            GameManager._MissionNumber = buttonId;
+
             // 情報画面に遷移
             SceneManager.LoadScene(Constants.SCENE_INFO);
-        }
-
-        /// <summary>
-        /// 「ハッキング」ボタン押下時アクション
-        /// </summary>
-        public void OnClickHackButton()
-        {
-            // ハッキング画面に遷移
-            SceneManager.LoadScene(Constants.SCENE_HACK);
         }
     }
 }

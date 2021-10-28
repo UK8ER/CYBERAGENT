@@ -11,7 +11,7 @@ namespace Common
         private Button _Button;
 
 
-        public void Initialized()
+        public void Init()
         {
             
         }
