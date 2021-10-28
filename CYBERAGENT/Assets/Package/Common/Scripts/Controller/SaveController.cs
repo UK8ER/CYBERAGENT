@@ -3,42 +3,96 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveController
+namespace Common
 {
-    private const string _Mission1 = "Mission1";
-    private const string _Mission2 = "Mission2";
-
-    /// <summary>
-    /// ミッションフラグを初期化する
-    /// </summary>
-    public void InitMissionFlug()
+    public static class SaveController
     {
-        PlayerPrefs.SetInt(Constants.MISSION1, 0);
-        PlayerPrefs.SetInt(Constants.MISSION2, 0);
-        Save();
-    }
-
-    /// <summary>
-    /// ミッションのクリア状況をセーブする
-    /// </summary>
-    public void ClearMisson(int missionNo)
-    {
-        switch (missionNo)
+        #region 初回フラグ
+        /// <summary>
+        /// 初回フラグを解除する
+        /// </summary>
+        public static void SetFirstFlug()
         {
-            case 1:
-                break;
-            case 2:
-                break;
-            default:
-                Debug.LogError("引数が不正です");
-                break;
+            PlayerPrefs.SetInt(Constants.FIRST_FLUG, 0);
+            Save();
         }
-        PlayerPrefs.SetInt(missionNo.ToString(), 1);
-    }
 
-    private void Save()
-    {
-        PlayerPrefs.Save();
-    }
+        /// <summary>
+        /// 初回フラグを取得する{0:初回ではない}{1:初回}
+        /// </summary>
+        public static bool GetFirstFlug()
+        {
+            if (PlayerPrefs.GetInt(Constants.FIRST_FLUG) == 1 || !PlayerPrefs.HasKey(Constants.FIRST_FLUG))
+            {
+                Debug.Log("初回");
+                return true;
+            }
+            else
+            {
+                Debug.Log("初回ではない");
+                return false;
+            }
+        }
+        #endregion
 
+        #region ミッションフラグ
+        /// <summary>
+        /// ミッションフラグを初期化する
+        /// </summary>
+        public static void InitMissionFlug()
+        {
+            PlayerPrefs.SetInt(Constants.MISSION1, 0);
+            PlayerPrefs.SetInt(Constants.MISSION2, 0);
+            Save();
+        }
+
+        /// <summary>
+        /// 指定のミッションのクリア状況をセーブする
+        /// </summary>
+        public static void SetMissonFlug(Constants.MissionType missionType)
+        {
+            switch (missionType)
+            {
+                case Constants.MissionType.Mission1:
+                    PlayerPrefs.SetInt(Constants.MISSION1, 1);
+                    break;
+                case Constants.MissionType.Mission2:
+                    PlayerPrefs.SetInt(Constants.MISSION2, 1);
+                    break;
+                default:
+                    Debug.LogError("引数が不正です");
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 指定のミッションのクリア状況を取得する
+        /// </summary>
+        public static bool GetMissonFlug(Constants.MissionType missionType)
+        {
+            int result;
+            switch (missionType)
+            {
+                case Constants.MissionType.Mission1:
+                    result = PlayerPrefs.GetInt(Constants.MISSION1);
+                    break;
+                case Constants.MissionType.Mission2:
+                    result = PlayerPrefs.GetInt(Constants.MISSION2);
+                    break;
+                default:
+                    result = 0;
+                    Debug.LogError("引数が不正です");
+                    break;
+            }
+            return result == 1;
+        }
+        #endregion
+
+        #region セーブ
+        public static void Save()
+        {
+            PlayerPrefs.Save();
+        }
+        #endregion
+    }
 }
