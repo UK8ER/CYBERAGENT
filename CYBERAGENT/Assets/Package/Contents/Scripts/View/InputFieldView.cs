@@ -5,28 +5,25 @@ using UnityEngine.UI;
 
 namespace ContentsPackage
 {
-    public class ModalView : MonoBehaviour
+    public class InputFieldView : MonoBehaviour
     {
-        [SerializeField]
-        private Canvas _ModalCanvas;
-
         [SerializeField]
         private InputField _InputField;
 
         /// <summary>
-        /// モーダルを開く
+        /// 入力された値をリセットする
         /// </summary>
-        public void OpenModal()
+        public void ResetInputWord()
         {
-            _ModalCanvas.enabled = true;
+            _InputField.text = "";
         }
 
         /// <summary>
-        /// モーダルを閉じる
+        /// 入力された値の正誤判定を行う
         /// </summary>
-        public void CloseModal()
+        public bool IsSuccess(string answer)
         {
-            _ModalCanvas.enabled = false;
+            return _InputField.text == answer;
         }
     }
 }

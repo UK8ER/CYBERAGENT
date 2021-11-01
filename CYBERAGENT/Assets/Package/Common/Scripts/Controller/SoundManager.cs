@@ -79,6 +79,12 @@ namespace Common
                 callback();
             }));
         }
+        public void SuccessPlay()
+        {
+            Debug.Log("サクセスサウンドを再生");
+            _SoundPlayer.clip = _SuccessSound;
+            _SoundPlayer.Play();
+        }
 
         /// <summary>
         /// NGのSEを再生
@@ -93,6 +99,12 @@ namespace Common
             {
                 callback();
             }));
+        }
+        public void NgSoundPlay()
+        {
+            Debug.Log("NGサウンドを再生");
+            _SoundPlayer.clip = _NgSound;
+            _SoundPlayer.Play();
         }
 
         /// <summary>

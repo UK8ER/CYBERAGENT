@@ -36,16 +36,12 @@ namespace ContentsPackage
         [Header("InputField")]
         /// <summary>入力ボックス</summary>
         [SerializeField]
-        private InputField _InputField;
-        /// <summary>入力ボックステキスト</summary>
-        [SerializeField]
-        private Text _InputFieldText;
+        private InputFieldView _InputFieldView;
 
         [Header("Animator")]
         /// <summary>アニメーションビュー</summary>
         [SerializeField]
         private AnimationView _AnimationView;
-
 
         [Header("SoundManager")]
         /// <summary>サウンドマネージャ</summary>
@@ -58,7 +54,9 @@ namespace ContentsPackage
         private int _NowServeyId;
         /// <summary>選択中Surveyリスト</summary>
         private List<Servey> _ServeyList;
+        /// <summary>選択中Survey情報</summary>
         private Servey _Servey;
+
         #endregion
 
         void Start()
@@ -89,6 +87,8 @@ namespace ContentsPackage
 
             // Animationを初期表示しない
             _AnimationView.StopAnimation();
+
+            _AnimationView.FinishAnimation.AddListener(AfterAnimation);
         }
 
         /// <summary>
@@ -110,6 +110,8 @@ namespace ContentsPackage
         /// </summary>
         public void OnClickInputCodeButton()
         {
+            // 入力フィールドのテキストをリセット
+            _InputFieldView.ResetInputWord();
             // SE再生
             _SoundManager.ButtonSESoundPlay(OnClickInputCodeButtonAction);
         }
@@ -124,28 +126,40 @@ namespace ContentsPackage
         /// </summary>
         public void OnClickSubmitButton()
         {
+            // モーダルを閉じる
+            _ModalView.CloseModal();
             // SE再生
             _SoundManager.ButtonSESoundPlay(OnClickSubmitButtonAction);
         }
         private void OnClickSubmitButtonAction()
         {
             // 正誤判定
-            if(_InputField.text== _Servey.AnswerText)
+            if(_InputFieldView.IsSuccess(_Servey.AnswerText))
             {
                 Debug.Log("正解");
                 _AnimationView.SetAnimationText("SUCCESS");
-
+                _SoundManager.SuccessPlay();
             }
             else
             {
                 Debug.Log("不正解");
                 _AnimationView.SetAnimationText("FAILED");
+                _SoundManager.NgSoundPlay();
             }
 
             // アニメーション再生
             _AnimationView.StartAnimation();
+            
         }
-
+        
+        /// <summary>
+        /// アニメーション再生終了後に呼び出される
+        /// </summary>
+        public void AfterAnimation()
+        {
+            Debug.Log("アニメーション終了");
+            _AnimationView.StopAnimation();
+        }
 
         /// <summary>
         /// モーダル上で閉じるボタン押下時アクション

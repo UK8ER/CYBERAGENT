@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Common
@@ -14,8 +15,20 @@ namespace Common
         private Animator _Animator;
         [SerializeField]
         private Text _AnimationText;
+        [SerializeField]
+        private Transform _AnimationPanel;
 
         private Coroutine _Coroutine;
+
+        /// <summary>コールバック用UnityEvent</summary>
+        public class FinishAnimationEvent : UnityEvent { }
+        private FinishAnimationEvent _FinishAnimationEvent = new FinishAnimationEvent();
+        public FinishAnimationEvent FinishAnimation
+        {
+            get { return this._FinishAnimationEvent; }
+            set { this._FinishAnimationEvent = value; }
+        }
+
         public void SetAnimationText(string text)
         {
             _AnimationText.text = text;
@@ -23,32 +36,42 @@ namespace Common
 
         public void StartAnimation()
         {
-            StartAnimationAction1(StartAnimationAction2);
+            _Coroutine = StartCoroutine(StartAnimationAction1());
         }
-
-        private void StartAnimationAction1(Action callback)
+        private IEnumerator StartAnimationAction1()
         {
-            _AnimatorCanvas.enabled = true;
-            callback();
+            //_AnimatorCanvas.enabled = true;
+            yield return StartCoroutine("StartAnimationAction2");
         }
-        private void StartAnimationAction2()
+        private IEnumerator StartAnimationAction2()
         {
             _Animator.enabled = true;
+            yield return null;
+            yield return new WaitForSeconds(3.0f);
+            
+            // コールバック
+            _FinishAnimationEvent.Invoke();
         }
 
 
         public void StopAnimation()
         {
-            StopAnimationAction1(StopAnimationAction2);
+            _Coroutine = StartCoroutine(StopAnimationAction1());
         }
-        private void StopAnimationAction1(Action callback)
+        private IEnumerator StopAnimationAction1()
         {
             _Animator.enabled = false;
-            callback();
+            yield return StartCoroutine("StopAnimationAction2");
         }
-        private void StopAnimationAction2()
+        private IEnumerator StopAnimationAction2()
         {
-            _AnimatorCanvas.enabled = false;
+            //_AnimatorCanvas.enabled = false;
+            ResetPosition();
+            yield return null;
+        }
+        private void ResetPosition()
+        {
+            _AnimationPanel.localPosition = new Vector3(2160, 0, 0);
         }
 
     }

@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 161689055}
   - component: {fileID: 161689054}
   - component: {fileID: 161689053}
+  - component: {fileID: 161689056}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -639,6 +640,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161689051}
   m_CullTransparentMesh: 1
+--- !u!114 &161689056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161689051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cec898a0a40b5249889a86801f817ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InputField: {fileID: 161689053}
 --- !u!1 &273079540
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,8 +866,7 @@ MonoBehaviour:
   _ModalView: {fileID: 1629014334}
   _MissionService: {fileID: 5414803320158440583, guid: 6c90b30dc130fd74caccb575994f7e32,
     type: 3}
-  _InputField: {fileID: 161689053}
-  _InputFieldText: {fileID: 0}
+  _InputFieldView: {fileID: 161689056}
   _AnimationView: {fileID: 1596992651}
   _SoundManager: {fileID: 1826886144}
 --- !u!4 &502927188
@@ -2253,6 +2266,7 @@ MonoBehaviour:
   _AnimatorCanvas: {fileID: 1596992648}
   _Animator: {fileID: 1596992650}
   _AnimationText: {fileID: 582668399}
+  _AnimationPanel: {fileID: 1292712406}
 --- !u!1 &1629014329
 GameObject:
   m_ObjectHideFlags: 0
