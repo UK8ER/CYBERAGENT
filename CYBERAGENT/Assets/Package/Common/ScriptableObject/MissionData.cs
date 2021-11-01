@@ -16,13 +16,13 @@ namespace Master
             public Constants.MissionType MissionType;
             public string TitleText;
             public string MissionText;
-            public List<MissionDetail> MissionDetailList;
+            public List<Servey> ServeyList;
         }
 
         [System.Serializable]
-        public class MissionDetail
+        public class Servey
         {
-            public int MissionId;
+            public int ServeyId;
             public string ServeyTitle;
             public string ServeyContents;
             public string AnswerText;

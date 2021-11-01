@@ -51,7 +51,7 @@ namespace MissionPackage
             _TitleView.SetText(_Mission.TitleText,_Mission.MissionText);
 
             // ボタンテキストを表示する
-            _SurveyButtonView.SetSurveyButtonText(_Mission.MissionDetailList);
+            _SurveyButtonView.SetSurveyButtonText(_Mission.ServeyList);
         }
 
         /// <summary>

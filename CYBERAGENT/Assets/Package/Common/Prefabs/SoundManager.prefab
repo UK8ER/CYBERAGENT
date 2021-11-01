@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _SoundPlayer: {fileID: 7740917635187948318}
   _ButtonSE: {fileID: 8300000, guid: 7ac21c3cfab8a2f42951c7c60a3ed886, type: 3}
-  _CanselSound: {fileID: 8300000, guid: e9fffb72cbaaf354a88dec2d83b30885, type: 3}
-  _NgSound: {fileID: 8300000, guid: 20e80c9d6307e344bbb973c41918c4a8, type: 3}
+  _SuccessSound: {fileID: 8300000, guid: 5deb2c01dbc28b1488e35bddc40d4dad, type: 3}
+  _NgSound: {fileID: 8300000, guid: 52325511e95819342b0028b7fd1cff9d, type: 3}
 --- !u!82 &7740917635187948318
 AudioSource:
   m_ObjectHideFlags: 0

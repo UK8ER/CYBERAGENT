@@ -16,40 +16,40 @@ MonoBehaviour:
   - MissionType: 0
     TitleText: MISSION 1
     MissionText: "2F\u30D5\u30ED\u30A2\u306B\u4E0A\u304C\u308B\u65B9\u6CD5\u3092\u63A2\u305B\uFF01"
-    MissionDetailList:
-    - MissionId: 0
-      ServeyTitle: "\u8ABF\u67FB No.1"
-      ServeyContents: "\u968E\u6BB5"
+    ServeyList:
+    - ServeyId: 0
+      ServeyTitle: "\u8ABF\u67FB No.01"
+      ServeyContents: "\u968E\u6BB5\u306E\u8B0E\u3092\u3068\u3051"
       AnswerText: POLICE
-    - MissionId: 1
-      ServeyTitle: "\u8ABF\u67FB No.2"
-      ServeyContents: "\u30C6\u30FC\u30D6\u30EB"
+    - ServeyId: 1
+      ServeyTitle: "\u8ABF\u67FB No.02"
+      ServeyContents: "\u30C6\u30FC\u30D6\u30EB\u306E\u8B0E\u3092\u89E3\u3051"
       AnswerText: ESCAPE
-    - MissionId: 2
-      ServeyTitle: "\u8ABF\u67FB No.3"
-      ServeyContents: "\u6C34\u8272\u3068\u30D4\u30F3\u30AF\u306E\u90E8\u5C4B"
+    - ServeyId: 2
+      ServeyTitle: "\u8ABF\u67FB No.03"
+      ServeyContents: "\u30D4\u30F3\u30AF\u3068\u6C34\u8272\u306E\u8B0E\u3092\u89E3\u3051"
       AnswerText: BLACK
-    - MissionId: 3
-      ServeyTitle: "\u8ABF\u67FB No.4"
-      ServeyContents: "\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002\u8ABF\u67FB\u3059\u308B\u3079\u304D\u3067\u3042\u308B\u3002"
-      AnswerText: "\u7BB1\u306E\u8B0E"
+    - ServeyId: 3
+      ServeyTitle: "\u8ABF\u67FB No.04"
+      ServeyContents: "\u7BB1\u306E\u8B0E\u3092\u89E3\u3051"
+      AnswerText: LIGHT
   - MissionType: 0
     TitleText: MISSION 2
     MissionText: "\u30DC\u30B9\u306E\u90E8\u5C4B\u3078\u306E\u5408\u8A00\u8449\u3092\u63A2\u305B\uFF01"
-    MissionDetailList:
-    - MissionId: 0
-      ServeyTitle: "\u8ABF\u67FB No.5"
-      ServeyContents: "\u304F\u307E\u306E\u306A\u305E"
+    ServeyList:
+    - ServeyId: 0
+      ServeyTitle: "\u8ABF\u67FB No.05"
+      ServeyContents: "\u30AF\u30DE\u306E\u8B0E\u3092\u89E3\u3051"
       AnswerText: GUN
-    - MissionId: 1
-      ServeyTitle: "\u8ABF\u67FB No.6"
-      ServeyContents: "\u624B\u3059\u308A\u306E\u8B0E"
+    - ServeyId: 1
+      ServeyTitle: "\u8ABF\u67FB No.06"
+      ServeyContents: "\u624B\u3059\u308A\u306E\u8B0E\u3092\u89E3\u3051"
       AnswerText: DANGER
-    - MissionId: 2
-      ServeyTitle: "\u8ABF\u67FB No.7"
-      ServeyContents: "\u8ECC\u8DE1\u306E\u8B0E"
+    - ServeyId: 2
+      ServeyTitle: "\u8ABF\u67FB No.07"
+      ServeyContents: "\u8ECC\u8DE1\u306E\u8B0E\u3092\u89E3\u3051"
       AnswerText: LIAR
-    - MissionId: 3
-      ServeyTitle: "\u8ABF\u67FB No.8"
-      ServeyContents: "\u30CD\u30AA\u30F3\u306E\u8B0E"
+    - ServeyId: 3
+      ServeyTitle: "\u8ABF\u67FB No.08"
+      ServeyContents: "\u30CD\u30AA\u30F3\u306E\u8B0E\u3092\u89E3\u3051"
       AnswerText: PARTNER

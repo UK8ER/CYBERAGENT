@@ -41,6 +41,12 @@ namespace ContentsPackage
         [SerializeField]
         private Text _InputFieldText;
 
+        [Header("Animator")]
+        /// <summary>アニメーションビュー</summary>
+        [SerializeField]
+        private AnimationView _AnimationView;
+
+
         [Header("SoundManager")]
         /// <summary>サウンドマネージャ</summary>
         [SerializeField]
@@ -50,8 +56,9 @@ namespace ContentsPackage
         private Constants.MissionType _NowMission;
         /// <summary>選択中調査ID</summary>
         private int _NowServeyId;
-        /// <summary>選択中ミッション</summary>
-        private Mission _Mission;
+        /// <summary>選択中Surveyリスト</summary>
+        private List<Servey> _ServeyList;
+        private Servey _Servey;
         #endregion
 
         void Start()
@@ -63,18 +70,25 @@ namespace ContentsPackage
             Debug.LogFormat("現在の調査ID:{0}", _NowServeyId.ToString());
 
             // マスタからデータ取得
-            _Mission = _MissionService.GetMission(_NowMission);
+            _ServeyList = _MissionService.GetMission(_NowMission).ServeyList;
 
-            // タイトル、ミッション内容を表示する
-            for(int i = 0; i < _Mission.MissionDetailList.Count; i++)
+            for(int i = 0; i < _ServeyList.Count; i++)
             {
-                if (_Mission.MissionDetailList[i].MissionId == _NowServeyId)
+                if (_ServeyList[i].ServeyId == _NowServeyId)
                 {
-                    _ServeyTitleView.SetText(_Mission.MissionDetailList[i].ServeyTitle);
-                    _ContentsTextView.SetContentsText(_Mission.MissionDetailList[i].ServeyContents);
+                    _Servey = _ServeyList[i];
                 }
             }
-            _InputField.OnSelect();
+
+            // タイトル、ミッション内容を表示する
+            _ServeyTitleView.SetText(_Servey.ServeyTitle);
+            _ContentsTextView.SetContentsText(_Servey.ServeyContents);
+
+            // モーダルは初期表示しない
+            _ModalView.CloseModal();
+
+            // Animationを初期表示しない
+            _AnimationView.StopAnimation();
         }
 
         /// <summary>
@@ -106,14 +120,31 @@ namespace ContentsPackage
         }
 
         /// <summary>
-        /// 入力ボックス押下時アクション
+        /// Submitボタン押下時アクション
         /// </summary>
-        public void OnClickInputBox()
+        public void OnClickSubmitButton()
         {
             // SE再生
-            _SoundManager.ButtonSESoundPlay();
+            _SoundManager.ButtonSESoundPlay(OnClickSubmitButtonAction);
         }
+        private void OnClickSubmitButtonAction()
+        {
+            // 正誤判定
+            if(_InputField.text== _Servey.AnswerText)
+            {
+                Debug.Log("正解");
+                _AnimationView.SetAnimationText("SUCCESS");
 
+            }
+            else
+            {
+                Debug.Log("不正解");
+                _AnimationView.SetAnimationText("FAILED");
+            }
+
+            // アニメーション再生
+            _AnimationView.StartAnimation();
+        }
 
 
         /// <summary>
