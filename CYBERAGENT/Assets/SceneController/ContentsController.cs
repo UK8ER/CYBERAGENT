@@ -13,6 +13,11 @@ namespace ContentsPackage
     public class ContentsController : MonoBehaviour
     {
         #region Field
+        [Header("MissionService")]
+        /// <summary>ミッションサービス</summary>
+        [SerializeField]
+        private MissionService _MissionService;
+
         [Header("Title")]
         /// <summary>タイトルビュー</summary>
         [SerializeField]
@@ -23,15 +28,16 @@ namespace ContentsPackage
         [SerializeField]
         private ContentsTextView _ContentsTextView;
 
+        [Header("Button")]
+        /// <summary>InputCodeボタン</summary>
+        [SerializeField]
+        private Button _InputCodeButton;
+
+
         [Header("Modal")]
         /// <summary>モーダルビュー</summary>
         [SerializeField]
         private ModalView _ModalView;
-
-        [Header("MissionService")]
-        /// <summary>ミッションサービス</summary>
-        [SerializeField]
-        private MissionService _MissionService;
 
         [Header("InputField")]
         /// <summary>入力ボックス</summary>
@@ -56,6 +62,9 @@ namespace ContentsPackage
         private List<Servey> _ServeyList;
         /// <summary>選択中Survey情報</summary>
         private Servey _Servey;
+
+        /// <summary>Surveyクリアフラグ</summary>
+        private bool _IsSuccess = false;
 
         #endregion
 
@@ -84,11 +93,8 @@ namespace ContentsPackage
 
             // モーダルは初期表示しない
             _ModalView.CloseModal();
-
-            // Animationを初期表示しない
-            _AnimationView.StopAnimation();
-
-            _AnimationView.FinishAnimation.AddListener(AfterAnimation);
+            // アニメーション初期化
+            _AnimationView.AnimationInit();
         }
 
         /// <summary>
@@ -139,6 +145,9 @@ namespace ContentsPackage
                 Debug.Log("正解");
                 _AnimationView.SetAnimationText("SUCCESS");
                 _SoundManager.SuccessPlay();
+                
+                // クリアフラグをキャッシュ
+                _IsSuccess = true;
             }
             else
             {
@@ -148,7 +157,7 @@ namespace ContentsPackage
             }
 
             // アニメーション再生
-            _AnimationView.StartAnimation();
+            _AnimationView.StartAnimation(AfterAnimation);
             
         }
         
@@ -158,7 +167,12 @@ namespace ContentsPackage
         public void AfterAnimation()
         {
             Debug.Log("アニメーション終了");
-            _AnimationView.StopAnimation();
+            
+            // クリアしていたら
+            if (_IsSuccess)
+            {
+                _InputCodeButton.interactable = false;
+            }
         }
 
         /// <summary>

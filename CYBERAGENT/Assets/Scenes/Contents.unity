@@ -861,11 +861,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef5057099d7d7d44b73b3cba0841b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ServeyTitleView: {fileID: 356156617}
-  _ContentsTextView: {fileID: 485227284}
-  _ModalView: {fileID: 1629014334}
   _MissionService: {fileID: 5414803320158440583, guid: 6c90b30dc130fd74caccb575994f7e32,
     type: 3}
+  _ServeyTitleView: {fileID: 356156617}
+  _ContentsTextView: {fileID: 485227284}
+  _InputCodeButton: {fileID: 118841686}
+  _ModalView: {fileID: 1629014334}
   _InputFieldView: {fileID: 161689056}
   _AnimationView: {fileID: 1596992651}
   _SoundManager: {fileID: 1826886144}
@@ -2142,7 +2143,6 @@ GameObject:
   - component: {fileID: 1596992648}
   - component: {fileID: 1596992647}
   - component: {fileID: 1596992646}
-  - component: {fileID: 1596992650}
   - component: {fileID: 1596992651}
   m_Layer: 5
   m_Name: ResultlCanvas
@@ -2232,25 +2232,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!95 &1596992650
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596992645}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a6ffd4d41d302154c85ea6e50837e4a5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1596992651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,7 +2245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _AnimatorCanvas: {fileID: 1596992648}
-  _Animator: {fileID: 1596992650}
   _AnimationText: {fileID: 582668399}
   _AnimationPanel: {fileID: 1292712406}
 --- !u!1 &1629014329
