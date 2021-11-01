@@ -1,29 +1,37 @@
-using Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Master.MissionData;
 
 namespace MissionPackage
 {
     public class SurveyButtonView : MonoBehaviour
     {
+        [Header("SurveyButtonID")]
+        public int SurveyButtonId;
+
+        [Header("SurveyButtonText")]
         [SerializeField]
-        private Text[] _SurVeyBUttonTexts;
+        private Text _SurveyBUttonText;
+
+        [Header("SurveyButtonImage")]
+        [SerializeField]
+        private Image _SurveyBUttonImage;
 
         /// <summary>
         /// ボタンテキストをセットする
         /// </summary>
-        public void SetSurveyButtonText(List<Servey> missionDetails)
+        public void SetSurveyButtonText(string text)
         {
-            for (int i = 0; i < missionDetails.Count; i++)
-            {
-                if (i == missionDetails[i].ServeyId)
-                {
-                    _SurVeyBUttonTexts[i].text = missionDetails[i].ServeyTitle;
-                }
-            }
+            _SurveyBUttonText.text = text;
+        }
+
+        /// <summary>
+        /// ボタン画像をセットする
+        /// </summary>
+        public void SetSurveyButtonImage(Sprite sprite)
+        {
+            _SurveyBUttonImage.sprite = sprite;
         }
     }
 }

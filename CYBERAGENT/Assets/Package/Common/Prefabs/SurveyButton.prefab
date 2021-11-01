@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5414274888814628890}
   - component: {fileID: 5414274888814628889}
   - component: {fileID: 5414274888814628888}
+  - component: {fileID: 4423423975427104818}
   m_Layer: 5
   m_Name: SurveyButton
   m_TagString: Untagged
@@ -133,6 +134,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4423423975427104818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414274888814628870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66059459f7cee064b9e3fb4138eba35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SurveyButtonId: 0
+  _SurveyBUttonText: {fileID: 5414274888899054576}
+  _SurveyBUttonImage: {fileID: 5414274888814628889}
 --- !u!1 &5414274888899054590
 GameObject:
   m_ObjectHideFlags: 0

@@ -171,7 +171,10 @@ namespace ContentsPackage
             // クリアしていたら
             if (_IsSuccess)
             {
+                // コード入力ボタンを押下不可にする
                 _InputCodeButton.interactable = false;
+                // PlayerPrefに保存
+                SaveController.SetMissonFlug(_NowMission, _NowServeyId, 3);
             }
         }
 

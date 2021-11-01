@@ -19,7 +19,7 @@ namespace MissionPackage
         [Header("SurveyButton")]
         /// <summary>調査ボタン</summary>
         [SerializeField]
-        private SurveyButtonView _SurveyButtonView;
+        private SurveyButtonGroupView _SurveyGroupButtonView;
 
         [Header("Master")]
         /// <summary>ミッションサービス</summary>
@@ -36,6 +36,7 @@ namespace MissionPackage
 
         /// <summary>選択中ミッション</summary>
         private Mission _Mission;
+
         #endregion
 
         void Start()
@@ -50,8 +51,11 @@ namespace MissionPackage
             // タイトル、ミッション内容を表示する
             _TitleView.SetText(_Mission.TitleText,_Mission.MissionText);
 
+            // ボタンのイメージを初期化
+            _SurveyGroupButtonView.SetSurveyButtonImage(_NowMission);
+
             // ボタンテキストを表示する
-            _SurveyButtonView.SetSurveyButtonText(_Mission.ServeyList);
+            _SurveyGroupButtonView.SetSurveyButtonText(_Mission.ServeyList);
         }
 
         /// <summary>

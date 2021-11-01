@@ -41,23 +41,31 @@ namespace Common
         /// </summary>
         public static void InitMissionFlug()
         {
-            PlayerPrefs.SetInt(Constants.MISSION1, 0);
-            PlayerPrefs.SetInt(Constants.MISSION2, 0);
+            PlayerPrefs.SetInt(Constants.MISSION1 + "-0", 0);
+            PlayerPrefs.SetInt(Constants.MISSION1 + "-1", 0);
+            PlayerPrefs.SetInt(Constants.MISSION1 + "-2", 0);
+            PlayerPrefs.SetInt(Constants.MISSION1 + "-3", 0);
+
+            PlayerPrefs.SetInt(Constants.MISSION2 + "-0", 0);
+            PlayerPrefs.SetInt(Constants.MISSION2 + "-1", 0);
+            PlayerPrefs.SetInt(Constants.MISSION2 + "-2", 0);
+            PlayerPrefs.SetInt(Constants.MISSION2 + "-3", 0);
+            
             Save();
         }
 
         /// <summary>
         /// 指定のミッションのクリア状況をセーブする
         /// </summary>
-        public static void SetMissonFlug(Constants.MissionType missionType)
+        public static void SetMissonFlug(Constants.MissionType missionType, int serveyId, int clearNo)
         {
             switch (missionType)
             {
                 case Constants.MissionType.Mission1:
-                    PlayerPrefs.SetInt(Constants.MISSION1, 1);
+                    PlayerPrefs.SetInt(Constants.MISSION1+"-"+serveyId, clearNo);
                     break;
                 case Constants.MissionType.Mission2:
-                    PlayerPrefs.SetInt(Constants.MISSION2, 1);
+                    PlayerPrefs.SetInt(Constants.MISSION2+"-"+serveyId, clearNo);
                     break;
                 default:
                     Debug.LogError("引数が不正です");
@@ -68,23 +76,23 @@ namespace Common
         /// <summary>
         /// 指定のミッションのクリア状況を取得する
         /// </summary>
-        public static bool GetMissonFlug(Constants.MissionType missionType)
+        public static int GetMissonFlug(Constants.MissionType missionType,int serveyId)
         {
             int result;
             switch (missionType)
             {
                 case Constants.MissionType.Mission1:
-                    result = PlayerPrefs.GetInt(Constants.MISSION1);
+                    result = PlayerPrefs.GetInt(Constants.MISSION1 + "-" + serveyId);
                     break;
                 case Constants.MissionType.Mission2:
-                    result = PlayerPrefs.GetInt(Constants.MISSION2);
+                    result = PlayerPrefs.GetInt(Constants.MISSION2 + "-" + serveyId);
                     break;
                 default:
                     result = 0;
                     Debug.LogError("引数が不正です");
                     break;
             }
-            return result == 1;
+            return result;
         }
         #endregion
 

@@ -27,6 +27,8 @@ namespace TopPackage
         private bool _Mission2ClearFlug;
         /// <summary>現在取り組んでいるミッションフラグ</summary>
         private bool _IsMission1;
+
+        private const int SURVEY_COUNT = 4;
         #endregion
 
         void Start()
@@ -46,7 +48,7 @@ namespace TopPackage
             else
             {
                 // ミッションフラグを取得
-                _Mission1ClearFlug = SaveController.GetMissonFlug(Constants.MissionType.Mission1);
+                _Mission1ClearFlug = IsMission1Clear();
             }
             // ミッションボタンの表示制御（ミッション１をクリアしていなければミッション２は取組不可）
             _MissionButtonView.MissionButton2Active(_Mission1ClearFlug);
@@ -77,6 +79,21 @@ namespace TopPackage
             }
             // 情報画面に遷移
             SceneManager.LoadScene(Constants.SCENE_MISSION);
+        }
+
+        private bool IsMission1Clear()
+        {
+            int counter = 0;
+
+            for(int i = 0; i < SURVEY_COUNT; i++)
+            {
+                if (SaveController.GetMissonFlug(Constants.MissionType.Mission1, i) == 0)
+                {
+                    counter++;
+                }
+            }
+            Debug.LogFormat("counter:{0}", counter);
+            return counter != 4;
         }
     }
 }
