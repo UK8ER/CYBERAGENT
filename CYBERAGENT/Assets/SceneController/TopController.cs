@@ -9,8 +9,15 @@ namespace TopPackage
     public class TopController : MonoBehaviour
     {
         #region Field
+        [Header("MissionButton")]
+        /// <summary>ミッションボタン</summary>
         [SerializeField]
         private MissionButtonView _MissionButtonView;
+        
+        [Header("SoundManager")]
+        /// <summary>サウンドマネージャ</summary>
+        [SerializeField]
+        private SoundManager _SoundManager;
 
         /// <summary>初回フラグ</summary>
         private bool _IsFirst;
@@ -18,7 +25,8 @@ namespace TopPackage
         private bool _Mission1ClearFlug;
         /// <summary>ミッション２フラグ</summary>
         private bool _Mission2ClearFlug;
-
+        /// <summary>現在取り組んでいるミッションフラグ</summary>
+        private bool _IsMission1;
         #endregion
 
         void Start()
@@ -39,7 +47,6 @@ namespace TopPackage
             {
                 // ミッションフラグを取得
                 _Mission1ClearFlug = SaveController.GetMissonFlug(Constants.MissionType.Mission1);
-                Debug.LogFormat("M1:{0} M2:{1}",_Mission1ClearFlug,_Mission2ClearFlug);
             }
             // ミッションボタンの表示制御（ミッション１をクリアしていなければミッション２は取組不可）
             _MissionButtonView.MissionButton2Active(_Mission1ClearFlug);
@@ -50,8 +57,17 @@ namespace TopPackage
         /// </summary>
         public void OnClickMissonButton(bool isMission1)
         {
+            // グローバル変数にキャッシュ
+            _IsMission1 = isMission1;
+
+            // SE再生
+            _SoundManager.ButtonSESoundPlay(OnClickMissionButtonAction);
+
+        }
+        private void OnClickMissionButtonAction()
+        {
             // GameManagerに選択したミッションを登録
-            if (isMission1)
+            if (_IsMission1)
             {
                 GameManager._NowMissionType = Constants.MissionType.Mission1;
             }

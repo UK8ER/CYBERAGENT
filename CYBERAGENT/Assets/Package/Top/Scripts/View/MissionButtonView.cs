@@ -13,7 +13,6 @@ namespace TopPackage
 
         [SerializeField]
         private CommonButtonView _Misson2Button;
-
         #endregion
 
         /// <summary>

@@ -7,6 +7,8 @@ namespace ContentsPackage
 {
     public class ContentsTextView : MonoBehaviour
     {
+        [Header("ContentsText")]
+        /// <summary>コンテンツテキスト</summary>
         [SerializeField]
         private Text _ContentsText;
 

@@ -11,15 +11,25 @@ namespace MissionPackage
     public class MissionController : MonoBehaviour
     {
         #region Field
+        [Header("Title")]
+        /// <summary>タイトル</summary>
         [SerializeField]
         private TitleView _TitleView;
 
+        [Header("SurveyButton")]
+        /// <summary>調査ボタン</summary>
         [SerializeField]
         private SurveyButtonView _SurveyButtonView;
 
         [Header("Master")]
+        /// <summary>ミッションサービス</summary>
         [SerializeField]
         private MissionService _MissionService;
+
+        [Header("SoundManager")]
+        /// <summary>サウンドマネージャ</summary>
+        [SerializeField]
+        private SoundManager _SoundManager;
 
         /// <summary>選択中ミッション</summary>
         private Constants.MissionType _NowMission;
@@ -49,6 +59,11 @@ namespace MissionPackage
         /// </summary>
         public void OnClickBackButton()
         {
+            // SE再生
+            _SoundManager.ButtonSESoundPlay(OnClickBackButtonAction);
+        }
+        private void OnClickBackButtonAction()
+        {
             // 情報画面に遷移
             SceneManager.LoadScene(Constants.SCENE_TOP);
         }
@@ -58,7 +73,14 @@ namespace MissionPackage
         /// </summary>
         public void OnClickServeyButton(int id)
         {
+            // GameManagerに選択したボタンIDをキャッシュ
             GameManager._NowServeyId = id;
+            // SE再生
+            _SoundManager.ButtonSESoundPlay(OnClickServeyButtonAction);
+
+        }
+        private void OnClickServeyButtonAction()
+        {
             // 情報画面に遷移
             SceneManager.LoadScene(Constants.SCENE_CONTENTS);
         }
