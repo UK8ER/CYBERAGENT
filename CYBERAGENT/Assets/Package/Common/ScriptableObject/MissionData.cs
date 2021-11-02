@@ -17,6 +17,7 @@ namespace Master
             public string TitleText;
             public string MissionText;
             public List<Servey> ServeyList;
+            public string AnswerWord;
         }
 
         [System.Serializable]

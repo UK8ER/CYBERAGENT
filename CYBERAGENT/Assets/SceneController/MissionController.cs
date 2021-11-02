@@ -26,6 +26,11 @@ namespace MissionPackage
         [SerializeField]
         private MissionAnswerView _MissionAnswerView;
 
+        [Header("Modal")]
+        /// <summary>モーダル</summary>
+        [SerializeField]
+        private ModalView _ModalView;
+
         [Header("Master")]
         /// <summary>ミッションサービス</summary>
         [SerializeField]
@@ -64,8 +69,11 @@ namespace MissionPackage
             // ボタンテキストを表示する
             _SurveyGroupButtonView.SetSurveyButtonText(_Mission.ServeyList);
 
-            _Counter = 0;
+            // モーダルは非表示
+            _ModalView.CloseModal();
+
             // ミッション内の調査をすべてクリアしている場合
+            _Counter = 0;
             for (int i = 0; i < 4; i++)
             {
                 if (SaveController.GetMissonFlug(_NowMission, i) != 0)
@@ -75,10 +83,12 @@ namespace MissionPackage
             }
             if (_Counter == 4)
             {
+                // AnserTextを表示
                 _MissionAnswerView.ActiveAnswerText();
             }
             else
             {
+                // AnserTextを非表示
                 _MissionAnswerView.InactiveAnswerText();
             }
         } 
@@ -112,6 +122,36 @@ namespace MissionPackage
         {
             // 情報画面に遷移
             SceneManager.LoadScene(Constants.SCENE_CONTENTS);
+        }
+
+        /// <summary>
+        /// TouchHereボタン押下時アクション
+        /// </summary>
+        public void OnClickTouchHereButton()
+        {
+            // SE再生
+            _SoundManager.ButtonSESoundPlay(OnClickTouchHereButtonAction);
+        }
+        private void OnClickTouchHereButtonAction()
+        {
+            // AnswerWordをセット
+            _ModalView.SetAnswerWord(_Mission.AnswerWord);
+            // モーダルを表示
+            _ModalView.OpenModal();
+        }
+
+        /// <summary>
+        /// モーダルのClose押下時アクション
+        /// </summary>
+        public void OnClickCloseButton()
+        {
+            // SE再生
+            _SoundManager.ButtonSESoundPlay(OnClickCloseButtonAction);
+        }
+        private void OnClickCloseButtonAction()
+        {
+            // モーダルを表示
+            _ModalView.CloseModal();
         }
     }
 }
