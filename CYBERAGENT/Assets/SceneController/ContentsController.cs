@@ -31,8 +31,7 @@ namespace ContentsPackage
         [Header("Button")]
         /// <summary>InputCodeボタン</summary>
         [SerializeField]
-        private Button _InputCodeButton;
-
+        private InputCodeButtonView _InputCodeButtonView;
 
         [Header("Modal")]
         /// <summary>モーダルビュー</summary>
@@ -43,6 +42,11 @@ namespace ContentsPackage
         /// <summary>入力ボックス</summary>
         [SerializeField]
         private InputFieldView _InputFieldView;
+
+        [Header("AnswerArea")]
+        /// <summary>解答エリア</summary>
+        [SerializeField]
+        private AnswerAreaView _AnswerAreaView;
 
         [Header("Animator")]
         /// <summary>アニメーションビュー</summary>
@@ -95,6 +99,17 @@ namespace ContentsPackage
             _ModalView.CloseModal();
             // アニメーション初期化
             _AnimationView.AnimationInit();
+
+            //すでに調査をクリアしている場合は、クリアモードに変更
+            if (SaveController.GetMissonFlug(_NowMission, _NowServeyId) != 0)
+            {
+                SetClearMode();
+            }
+            else
+            {
+                SetUnclearMode();
+            }
+
         }
 
         /// <summary>
@@ -171,8 +186,8 @@ namespace ContentsPackage
             // クリアしていたら
             if (_IsSuccess)
             {
-                // コード入力ボタンを押下不可にする
-                _InputCodeButton.interactable = false;
+                // クリアモードに変更
+                SetClearMode(); ;
                 // PlayerPrefに保存
                 SaveController.SetMissonFlug(_NowMission, _NowServeyId, 3);
             }
@@ -190,6 +205,29 @@ namespace ContentsPackage
         {
             // モーダルを閉じる
             _ModalView.CloseModal();
+        }
+
+        /// <summary>
+        /// クリアモード
+        /// </summary>
+        private void SetClearMode()
+        {
+            // InputCodeボタンを非表示
+            _InputCodeButtonView.InactiveButton();
+            // 解答エリアを表示
+            _AnswerAreaView.SetAnswerText(_Servey.AnswerText);
+            _AnswerAreaView.ActiveAnswerArea();
+        }
+
+        /// <summary>
+        /// アンクリアモード
+        /// </summary>
+        private void SetUnclearMode()
+        {
+            // InputCodeボタンを表示
+            _InputCodeButtonView.ActiveButton();
+            // クリアしていない場合は、解答エリアを表示しない
+            _AnswerAreaView.InactiveAnswerArea();
         }
     }
 }
