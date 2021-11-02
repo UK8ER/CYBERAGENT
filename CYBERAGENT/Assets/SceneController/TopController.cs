@@ -93,7 +93,7 @@ namespace TopPackage
                 }
             }
             Debug.LogFormat("counter:{0}", counter);
-            return counter != 4;
+            return counter == 0;
         }
     }
 }
