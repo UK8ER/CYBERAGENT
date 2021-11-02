@@ -20,6 +20,8 @@ namespace Common
         public const string MISSION1 = "Mission1";
         /// <summary>ミッション２完了フラグ</summary>
         public const string MISSION2 = "Mission2";
+        /// <summary>間違えた数カウント</summar>
+        public const string MISSCOUNT = "MissCount";
         #endregion
 
         public enum MissionType

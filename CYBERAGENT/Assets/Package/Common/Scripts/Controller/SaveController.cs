@@ -63,9 +63,11 @@ namespace Common
             {
                 case Constants.MissionType.Mission1:
                     PlayerPrefs.SetInt(Constants.MISSION1+"-"+serveyId, clearNo);
+                    Save();
                     break;
                 case Constants.MissionType.Mission2:
                     PlayerPrefs.SetInt(Constants.MISSION2+"-"+serveyId, clearNo);
+                    Save();
                     break;
                 default:
                     Debug.LogError("引数が不正です");
@@ -79,19 +81,56 @@ namespace Common
         public static int GetMissonFlug(Constants.MissionType missionType,int serveyId)
         {
             int result;
+            if (PlayerPrefs.HasKey(missionType + "-" + serveyId))
+            {
+                Debug.Log("PlayerPrefに登録がありません");
+                result = PlayerPrefs.GetInt(missionType + "-" + serveyId);
+            }
+            else
+            {
+                result = 0;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 指定のミッションの間違えた数をセーブする
+        /// </summary>
+        public static void SetMissCount(Constants.MissionType missionType, int serveyId, int missCount)
+        {
             switch (missionType)
             {
                 case Constants.MissionType.Mission1:
-                    result = PlayerPrefs.GetInt(Constants.MISSION1 + "-" + serveyId);
+                    PlayerPrefs.SetInt("MISS_COUNT" + Constants.MISSION1 + "-" + serveyId, missCount);
+                    Save();
                     break;
                 case Constants.MissionType.Mission2:
-                    result = PlayerPrefs.GetInt(Constants.MISSION2 + "-" + serveyId);
+                    PlayerPrefs.SetInt("MISS_COUNT" + Constants.MISSION2 + "-" + serveyId, missCount);
+                    Save();
                     break;
                 default:
-                    result = 0;
                     Debug.LogError("引数が不正です");
                     break;
             }
+        }
+
+        /// <summary>
+        /// 指定のミッションの間違えた数を取得する
+        /// </summary>
+        public static int GetMissCount(Constants.MissionType missionType, int serveyId)
+        {
+            int result;
+            if (PlayerPrefs.HasKey("MISS_COUNT" + missionType + "-" + serveyId))
+            {
+                Debug.Log("PlayerPrefに登録がありません");
+                result = PlayerPrefs.GetInt("MISS_COUNT" + missionType + "-" + serveyId);
+            }
+            else
+            {
+                result = 0;
+            }
+                    
             return result;
         }
         #endregion

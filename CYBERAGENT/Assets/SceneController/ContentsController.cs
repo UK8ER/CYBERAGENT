@@ -69,6 +69,8 @@ namespace ContentsPackage
 
         /// <summary>Surveyクリアフラグ</summary>
         private bool _IsSuccess = false;
+        /// <summary>間違えた数カウント</summary>
+        private int _MissCount = 0;
 
         #endregion
 
@@ -77,8 +79,6 @@ namespace ContentsPackage
             // GameManagerから選択したミッションと調査IDを取得
             _NowMission = GameManager._NowMissionType;
             _NowServeyId = GameManager._NowServeyId;
-            Debug.LogFormat("現在のミッション:{0}", _NowMission.ToString());
-            Debug.LogFormat("現在の調査ID:{0}", _NowServeyId.ToString());
 
             // マスタからデータ取得
             _ServeyList = _MissionService.GetMission(_NowMission).ServeyList;
@@ -109,7 +109,9 @@ namespace ContentsPackage
             {
                 SetUnclearMode();
             }
-
+            
+            // 間違えた数カウントをPlayerPrefから取得
+            _MissCount = SaveController.GetMissCount(_NowMission, _NowServeyId);
         }
 
         /// <summary>
@@ -169,6 +171,13 @@ namespace ContentsPackage
                 Debug.Log("不正解");
                 _AnimationView.SetAnimationText("FAILED");
                 _SoundManager.NgSoundPlay();
+
+                // 間違えた数をカウントアップ
+                _MissCount++;
+                
+                // 間違えた数をPlayerPrefに登録
+                Debug.LogFormat("間違えた回数:{0}", _MissCount);
+                SaveController.SetMissCount(_NowMission, _NowServeyId, _MissCount);
             }
 
             // アニメーション再生
@@ -188,8 +197,8 @@ namespace ContentsPackage
             {
                 // クリアモードに変更
                 SetClearMode(); ;
-                // PlayerPrefに保存
-                SaveController.SetMissonFlug(_NowMission, _NowServeyId, 3);
+                // 間違えた数を取得しクリア状況とランクをPlayerPrefに保存
+                SaveController.SetMissonFlug(_NowMission, _NowServeyId, GetLank(_MissCount));
             }
         }
 
@@ -228,6 +237,26 @@ namespace ContentsPackage
             _InputCodeButtonView.ActiveButton();
             // クリアしていない場合は、解答エリアを表示しない
             _AnswerAreaView.InactiveAnswerArea();
+        }
+        /// <summary>
+        /// 間違えた数を渡してランクを返す処理
+        /// </summary>
+        private int GetLank(int missCount)
+        {
+            int rank;
+            if (missCount == 0)
+            {
+                rank = 3;
+            }
+            else if (missCount == 1)
+            {
+                rank = 2;
+            }
+            else
+            {
+                rank = 1;
+            }
+            return rank;
         }
     }
 }
