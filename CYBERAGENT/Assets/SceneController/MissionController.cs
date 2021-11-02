@@ -21,6 +21,11 @@ namespace MissionPackage
         [SerializeField]
         private SurveyButtonGroupView _SurveyGroupButtonView;
 
+        [Header("MissionAnswer")]
+        /// <summary>ミッションの答え</summary>
+        [SerializeField]
+        private MissionAnswerView _MissionAnswerView;
+
         [Header("Master")]
         /// <summary>ミッションサービス</summary>
         [SerializeField]
@@ -37,26 +42,46 @@ namespace MissionPackage
         /// <summary>選択中ミッション</summary>
         private Mission _Mission;
 
+        /// <summary>カウンター</summary>
+        private int _Counter;
         #endregion
 
         void Start()
         {
             // GameManagerから選択したミッションを取得
             _NowMission = GameManager._NowMissionType;
-            Debug.LogFormat("現在のミッション:{0}",_NowMission.ToString());
+            Debug.LogFormat("現在のミッション:{0}", _NowMission.ToString());
 
             // マスタからデータ取得
             _Mission = _MissionService.GetMission(_NowMission);
 
             // タイトル、ミッション内容を表示する
-            _TitleView.SetText(_Mission.TitleText,_Mission.MissionText);
+            _TitleView.SetText(_Mission.TitleText, _Mission.MissionText);
 
             // ボタンのイメージを初期化
             _SurveyGroupButtonView.SetSurveyButtonImage(_NowMission);
 
             // ボタンテキストを表示する
             _SurveyGroupButtonView.SetSurveyButtonText(_Mission.ServeyList);
-        }
+
+            _Counter = 0;
+            // ミッション内の調査をすべてクリアしている場合
+            for (int i = 0; i < 4; i++)
+            {
+                if (SaveController.GetMissonFlug(_NowMission, i) != 0)
+                {
+                    _Counter++;
+                }
+            }
+            if (_Counter == 4)
+            {
+                _MissionAnswerView.ActiveAnswerText();
+            }
+            else
+            {
+                _MissionAnswerView.InactiveAnswerText();
+            }
+        } 
 
         /// <summary>
         /// 「もどる」ボタン押下時アクション
