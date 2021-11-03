@@ -17,7 +17,7 @@ namespace ContentsPackage
         /// </summary>
         public void SetContentsText(string text)
         {
-            _ContentsText.text = text;
+            _ContentsText.text = text.Replace("/", "\n"); ;
         }
     }
 }
