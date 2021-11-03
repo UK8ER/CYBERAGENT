@@ -195,10 +195,10 @@ namespace ContentsPackage
             // クリアしていたら
             if (_IsSuccess)
             {
-                // クリアモードに変更
-                SetClearMode(); ;
                 // 間違えた数を取得しクリア状況とランクをPlayerPrefに保存
                 SaveController.SetMissonFlug(_NowMission, _NowServeyId, GetLank(_MissCount));
+                // クリアモードに変更
+                SetClearMode();
             }
         }
 
